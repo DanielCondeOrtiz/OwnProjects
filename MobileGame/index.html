@@ -1,0 +1,1183 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>Juego</title>
+    <script type="text/javascript" src="zepto.min.js" > </script>
+    <script type="text/javascript" src="touch.js" > </script>
+    <meta charset="utf-8">
+    <style type="text/css">
+        #contenedor{
+            border: 2px dashed black;
+            width: 700px;
+            height: 400px;
+            border-radius: 3px;
+        }
+        #cuadrado{
+            height: 25px;
+            width: 25px;
+            background-color: red;
+            position: relative;
+            top: 372px;
+            left: 3px;
+
+        }
+        #emp{
+            width: 460px;
+            height: 150px;
+            background-color: steelblue;
+            border: 7px ridge darkblue;
+            position: absolute;
+            top: 140px;
+            left: 130px;
+            font-size: 40pt;
+            font-variant: small-caps;
+            border-radius: 20px;
+        }
+        #emp:hover{
+            background-color: darkturquoise;
+            border-color: teal;
+        }
+        #emp:active{
+            background-color: lightsteelblue;
+            border-color: aquamarine;
+            color: white;
+        }
+        #par{
+            width: 400px;
+            height: 50px;
+            position: absolute;
+            margin-left: 0;
+            margin-top: 4px;
+            border: 10px inset crimson;
+            background-color: darksalmon;
+            margin-left: 200px;
+            font-size: 19pt;
+            opacity: 0;
+            visibility: hidden;
+            border-bottom-left-radius: 15px;
+            border-bottom-right-radius: 15px;
+            left: -42px;
+        }
+        #par:hover{
+            background-color: tan;
+            border-color: red;
+        }
+        #par:active{
+            background-color: peru;
+            border-color: wheat;
+            color: white;
+        }
+        #vue{
+            width: 400px;
+            height: 100px;
+            background-color: springgreen;
+            border: 20px outset palegreen;
+            margin-left: 150px;
+            border-radius: 2px;
+            margin-top: 7px;
+            font-size: 30pt;
+            font-weight: bold;
+            opacity: 0;
+            visibility: hidden;
+            border-top-left-radius: 15px;
+            border-top-right-radius: 15px;
+        }
+        #vue:hover{
+            background-color: mediumspringgreen;
+            border-color: lime;
+        }
+        #vue:active{
+            background-color: forestgreen;
+            border-color: darkolivegreen;
+            color: white;
+        }
+        .caen{
+            width: 10px;
+            height: 35px;
+            background-color: indigo;
+            position: absolute;
+            opacity: 0;
+            float: left;
+            top: 3px;
+        }
+        #cuentaca{
+            position: absolute;
+            font-family: Arial;
+            font-size: 140pt;
+            color: blue;
+            opacity: 0;
+            top: -75px;
+            left: 250px;
+            text-shadow: 4px 4px 3px darkblue;
+        }
+        #spam{
+            font-size: 12pt;
+            color: gray;
+            opacity: 0.5;
+            position: absolute;
+            top: 372px;
+            left: 620px;
+            font-family: Helvetica;
+        }
+        #over{
+            width: 460px;
+            height: 150px;
+            background-color: orangered;
+            border: 25px outset goldenrod;
+            position: absolute;
+            top: 210px;
+            left: 130px;
+            font-size: 40pt;
+            font-variant: small-caps;
+            border-radius: 23px;
+            visibility: hidden;
+            opacity: 0;
+        }
+        #over:hover{
+            background-color: lightsalmon;
+            border-color: coral;
+        }
+        #over:active{
+            background-color: palevioletred;
+            border-color: indianred;
+            color: white;
+        }
+        #ayuda{
+            position: absolute;
+            top: 350px;
+            left: 239px;
+            font-size: 13pt;
+            font-family: Arial;
+            opacity: 0;
+        }
+        #ultimo,#mejor{
+            position: absolute;
+            font-family: Calibri;
+            font-variant: small-caps;
+            font-size: 18pt;
+            color: midnightblue;
+            font-weight: bold;
+        }
+        #ultimo{
+            left: 593px;
+            top:-12px;
+        }
+        #mejor{
+            left: 599px;
+            top: 13px;
+        }
+        #instru{
+            position: absolute;
+            top: 300px;
+            height: 65px;
+            width: 222px;
+            left: 130px;
+            font-size: 14pt;
+            background-color: pink;
+            border: 6px double hotpink;
+            border-radius: 13px;
+        }
+        #instru:hover{
+            background-color: rgb(255,218,212);
+            border-color: mediumvioletred;
+        }
+        #instru:active{
+            background-color: deeppink;
+            border-color: pink;
+            color: white;
+        }
+        #puntu{
+            position: absolute;
+            height: 65px;
+            width: 222px;
+            top: 300px;
+            left: 365px;
+            font-size: 14pt;
+            background-color: sandybrown;
+            border: 6px double saddlebrown;
+            border-radius: 13px;
+        }
+        #puntu:hover{
+            background-color: goldenrod;
+            border-color: bisque;
+        }
+        #puntu:active{
+            background-color: tan;
+            border-color: darkgoldenrod;
+            color: white;
+        }
+        #dificultad{
+            position: relative;
+            margin: 0;
+        }
+        .nodado{
+            position: relative;
+            width: 75px;
+            height: 30px;
+            margin-top: 7px;
+            border: 3px groove teal;
+            background-color: turquoise;
+            border-radius: 15px;
+        }
+        .nodado:hover{
+            border-color: cyan;
+            background-color: deepskyblue;
+        }
+        .nodado:active{
+            border-color: mediumaquamarine;
+            background-color: darkcyan;
+            color: white;
+        }
+        .dado{
+            position: relative;
+            width: 75px;
+            height: 30px;
+            margin-top: 7px;
+            border: 3px groove mediumaquamarine;
+            color: white;
+            background-color: darkcyan;
+            border-radius: 15px;
+        }
+        .dado:hover{
+            border-color: cyan;
+            background-color: deepskyblue;
+            color: black;
+        }
+        .dado:active{
+            border-color: teal;
+            background-color: turquoise;
+            color: black;
+        }
+        #contenedorsillo{
+            border: 3px dotted blue;
+            padding: 9px;
+            position: absolute;
+            left: 598px;
+            top: 142px;
+            text-align: center;
+            font-size: 13pt;
+            font-family: Arial;
+            border-radius: 7px;
+            background-color: cyan;
+            font-variant: small-caps;
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+        #dificulti{
+            position: absolute;
+            top: 56px;
+            left: 590px;
+            font-size: 10pt;
+            font-family: Arial;
+        }
+    </style>
+    <script type="text/javascript">
+function info (elEvento) { 
+         evento = elEvento || window.event;
+         k=evento.keyCode; //n�mero de c�digo de la tecla.
+         if (k === 32) {
+            espasio();
+            k = 0;
+         }
+         }
+window.onload = function() {
+document.onkeypress = info;
+}
+</script>
+</head>
+
+<body>
+<div id="contenedor">
+<div id="ca1" class="caen"></div>
+<div id="ca2" class="caen"></div>
+<div id="ca3" class="caen"></div>
+<div id="ca4" class="caen"></div>
+<div id="ca5" class="caen"></div>
+<div id="ca6" class="caen"></div>
+<div id="ca7" class="caen"></div>
+<div id="ca8" class="caen"></div>
+<div id="ca9" class="caen"></div>
+<div id="ca10" class="caen"></div>
+<div id="ca11" class="caen"></div>
+<div id="ca12" class="caen"></div>
+<div id="ca13" class="caen"></div>
+<div id="ca14" class="caen"></div>
+<div id="ca15" class="caen"></div>
+<div id="ca16" class="caen"></div>
+<div id="ca17" class="caen"></div>
+<div id="ca18" class="caen"></div>
+<div id="ca19" class="caen"></div>
+<div id="ca20" class="caen"></div>
+<div id="cuadrado"></div>
+</div>
+<p id="spam">&#169Danini191</p>
+<p id="ayuda">(Pulsa para empezar otra vez)</p>
+<p id="ultimo"></p>
+<p id="mejor"></p>
+<input type="button" id="emp" value="Empezar" onclick="empezar()">
+<input type="button" id="vue" value="Girar" onclick="vuelta()"><br>
+<input type="button" id="par" value="Reiniciar" onclick="parar()">
+<input type="button" id="over" value="Game Over :(" onclick="parar1()">
+<p id="cuentaca"></p>
+<input type="button" id="instru" value="Instrucciones" onclick="instrucciones()">
+<input type="button" id="puntu" value="Reiniciar puntuaci�n" onclick="cero()">
+<div id="contenedorsillo">
+<p id="dificultad">Dificultad</p>
+<input type="button" id="facil" value="Fácil" onclick="faci()" class="nodado"><br>
+<input type="button" id="normal" value="Normal" onclick="norma()" class="nodado"><br>
+<input type="button" id="dificil" value="Difícil" onclick="difici()" class="nodado">
+</div>
+<p id="dificulti">(Dificultad: Normal)</p>
+<script>
+    var cuadra = document.getElementById("cuadrado").style;
+    var pixel = 3,puntos=0,o=0, lado1=0, a="", der="",sumar1=350,sumar2=2,sumar3=1, parar2=0, subir1="",mejor1=0,ultimo1=0,subir2=0,posision=-75,izq="",lado=0,espacio=0,empezado=0,orden=0,culo=0,compro="",b=0,wasa="";
+    var waso1="",waso2="",waso3="",waso4="",waso5="",waso6="",waso7="",waso8="",waso9="",waso10="",waso11="",waso12="",waso13="",waso14="",waso15="",waso16="",waso17="",waso18="",waso19="",waso20="";
+    var arma1=3,arma2=3,arma3=3,arma4=3,arma5=3,arma6=3,arma7=3,arma8=3,arma9=3,arma10=3,arma11=3,arma12=3,arma13=3,arma14=3,arma15=3,arma16=3,arma17=3,arma18=3,arma19=3,arma20=3;
+    var lido1 = 0,lido2 = 0,lido3 = 0,lido4 = 0,lido5 = 0,lido6 = 0,lido7 = 0,lido8 = 0,lido9 = 0,lido10 = 0,lido11 = 0,lido12 = 0,lido13 = 0,lido14 = 0,lido15 = 0,lido16 = 0,lido17 = 0,lido18 = 0,lido19 = 0,lido20 = 0;
+    var ludo1 = 0,ludo2 = 0,ludo3 = 0,ludo4 = 0,ludo5 = 0,ludo6 = 0,ludo7 = 0,ludo8 = 0,ludo9 = 0,ludo10 = 0,ludo11 = 0,ludo12 = 0,ludo13 = 0,ludo14 = 0,ludo15 = 0,ludo16 = 0,ludo17 = 0,ludo18 = 0,ludo19 = 0,ludo20 = 0;
+    var ludoo1 = 0,ludoo2 = 0,ludoo3 = 0,ludoo4 = 0,ludoo5 = 0,ludoo6 = 0,ludoo7 = 0,ludoo8 = 0,ludoo9 = 0,ludoo10 = 0,ludoo11 = 0,ludoo12 = 0,ludoo13 = 0,ludoo14 = 0,ludoo15 = 0,ludoo16 = 0,ludoo17 = 0,ludoo18 = 0,ludoo19 = 0,ludoo20 = 0;
+    var cae1 = document.getElementById("ca1").style;
+    var cae2 = document.getElementById("ca2").style;
+    var cae3 = document.getElementById("ca3").style;
+    var cae4 = document.getElementById("ca4").style;
+    var cae5 = document.getElementById("ca5").style;
+    var cae6 = document.getElementById("ca6").style;
+    var cae7 = document.getElementById("ca7").style;
+    var cae8 = document.getElementById("ca8").style;
+    var cae9 = document.getElementById("ca9").style;
+    var cae10 = document.getElementById("ca10").style;
+    var cae11 = document.getElementById("ca11").style;
+    var cae12 = document.getElementById("ca12").style;
+    var cae13 = document.getElementById("ca13").style;
+    var cae14 = document.getElementById("ca14").style;
+    var cae15 = document.getElementById("ca15").style;
+    var cae16 = document.getElementById("ca16").style;
+    var cae17 = document.getElementById("ca17").style;
+    var cae18 = document.getElementById("ca18").style;
+    var cae19 = document.getElementById("ca19").style;
+    var cae20 = document.getElementById("ca20").style;
+    
+    var cuenta = document.getElementById("cuentaca");
+    var estail = cuenta.style;
+    var carra = [cae1,cae2,cae3,cae4,cae5,cae6,cae7,cae8,cae9,cae10,cae11,cae12,cae13,cae14,cae15,cae16,cae17,cae18,cae19,cae20];
+    
+    var ayuda1 = document.getElementById("ayuda").style;
+    var over1 = document.getElementById("over").style;
+    
+    var ultimo2 = document.getElementById("ultimo");
+    var mejor2 = document.getElementById("mejor");
+    
+    var emp = document.getElementById("emp");
+    var vue = document.getElementById("vue");
+    var par = document.getElementById("par");
+    
+    localStorage.facc = (localStorage.facc || 0);
+    localStorage.facm = (localStorage.facm || 0);
+    localStorage.norc = (localStorage.norc || 0);
+    localStorage.norm = (localStorage.norm || 0);
+    localStorage.difc = (localStorage.difc || 0);
+    localStorage.difm = (localStorage.difm || 0);
+    
+    var facil1 = document.getElementById("facil");
+    var normal1 = document.getElementById("normal");    
+    var dificil1 = document.getElementById("dificil");
+    var contenedorsillo1 = document.getElementById("contenedorsillo").style;
+    var dificulti1 = document.getElementById("dificulti");
+    localStorage.dificul = (localStorage.dificul || 0);
+    
+    $("#contenedor").on("tap",espasio);
+    
+    function moverd() {
+        a = 1;
+        pixel = pixel + sumar2;
+        cuadra.left = pixel + "px";
+        if (pixel >= 673) {
+            vuelta();
+        }
+    }
+    function vuelta() {
+        if (a === 1) {
+            clearInterval(der);
+            izq = setInterval("moveri()",1);
+        }
+        else if (a === 0) {
+            clearInterval(izq);
+            der = setInterval("moverd()",1);
+            if (b===0) {
+                wasa = setInterval("aleatorio()",sumar1);
+                b = 1;
+                espacio = 1;
+            }
+            else{
+                b = 1;
+            }
+        }
+        else{
+            console.log("b");
+        }
+    }
+    function moveri() {
+        a = 0;
+        pixel = pixel - sumar2;
+        cuadra.left = pixel + "px";
+        if (pixel <= 3) {
+            vuelta();
+        }
+        }
+    function empezar() {
+        if (empezado===0) {
+            document.getElementById("puntu").style.visibility="hidden";
+            document.getElementById("instru").style.visibility="hidden";
+            contenedorsillo1.visibility="hidden";
+            posision = -75;
+            subir2 = 0;
+            espacio=3;
+            puntos = 0;
+            empezado = 1;
+            waso1 = setInterval("bajar1()",1);
+            waso2 = setInterval("bajar2()",1);
+            waso3 = setInterval("bajar3()",1);
+            waso4 = setInterval("bajar4()",1);
+            waso5 = setInterval("bajar5()",1);
+            waso6 = setInterval("bajar6()",1);
+            waso7 = setInterval("bajar7()",1);
+            waso8 = setInterval("bajar8()",1);
+            waso9 = setInterval("bajar9()",1);
+            waso10 = setInterval("bajar10()",1);
+            waso11 = setInterval("bajar11()",1);
+            waso12 = setInterval("bajar12()",1);
+            waso13 = setInterval("bajar13()",1);
+            waso14 = setInterval("bajar14()",1);
+            waso15 = setInterval("bajar15()",1);
+            waso16 = setInterval("bajar16()",1);
+            waso17 = setInterval("bajar17()",1);
+            waso18 = setInterval("bajar18()",1);
+            waso19 = setInterval("bajar19()",1);
+            waso20 = setInterval("bajar20()",1);
+            compro = setInterval("comprobar()",1)
+            emp.value ="3"
+            setTimeout(function(){emp.value ="3."},250);
+            setTimeout(function(){emp.value ="3.."},500);
+            setTimeout(function(){emp.value ="3..."},750);
+            setTimeout(function(){emp.value ="2"},1000);
+            setTimeout(function(){emp.value ="2."},1250);
+            setTimeout(function(){emp.value ="2.."},1500);
+            setTimeout(function(){emp.value ="2..."},1750);
+            setTimeout(function(){emp.value ="1"},2000);
+            setTimeout(function(){emp.value ="1."},2250);
+            setTimeout(function(){emp.value ="1.."},2500);
+            setTimeout(function(){emp.value ="1..."},2750);
+            setTimeout(function(){emp.value ="YA!"},3000);
+            setTimeout(function(){
+            vue.style.visibility="visible";
+            par.style.visibility="visible";
+            emp.style.opacity="0.87";
+            vue.style.opacity="0.12";
+            par.style.opacity="0.12"},3100);
+            setTimeout(function(){
+            emp.style.opacity="0.75";
+            vue.style.opacity="0.25";
+            par.style.opacity="0.25"},3200);
+            setTimeout(function(){
+            emp.style.opacity="0.62";
+            vue.style.opacity="0.37";
+            par.style.opacity="0.37"},3275);
+        setTimeout(function(){
+            emp.style.opacity="0.5";
+            vue.style.opacity="0.5";
+            par.style.opacity="0.5"},3350);
+        setTimeout(function(){
+            emp.style.opacity="0.37";
+            vue.style.opacity="0.62";
+            par.style.opacity="0.62"},3415);
+        setTimeout(function(){
+            emp.style.opacity="0.25";
+            vue.style.opacity="0.75";
+            par.style.opacity="0.75"},3480);
+        setTimeout(function(){
+            emp.style.opacity="0.12";
+            vue.style.opacity="0.87";
+            par.style.opacity="0.87"},3530);
+        setTimeout(function(){
+            emp.style.opacity="0";
+            vue.style.opacity="1";
+            par.style.opacity="1";
+            emp.style.visibility="visible";
+            moveri();
+            cuenta.style.opacity="0.25";
+            cuenta.style.top="-75px"},3600);
+        }
+        else{
+            empezado = 1;
+        }
+        }
+    function aleatorio() {
+        culo = Math.floor(Math.random() * 545);
+        carra[orden].left = culo + "px";
+        carra[orden].opacity = 1;
+        orden = orden + 1;
+        if (orden === 20) {
+            orden = 0;
+        }
+    }
+    function parar() {
+        clearInterval(der);
+        clearInterval(izq);
+        clearInterval(wasa);
+        clearInterval(waso1);
+        clearInterval(waso2);
+        clearInterval(waso3);
+        clearInterval(waso4);
+        clearInterval(waso5);
+        clearInterval(waso6);
+        clearInterval(waso7);
+        clearInterval(waso8);
+        clearInterval(waso9);
+        clearInterval(waso10);
+        clearInterval(waso11);
+        clearInterval(waso12);
+        clearInterval(waso13);
+        clearInterval(waso14);
+        clearInterval(waso15);
+        clearInterval(waso16);
+        clearInterval(waso17);
+        clearInterval(waso18);
+        clearInterval(waso19);
+        clearInterval(waso20);
+        clearInterval(compro);
+        cuadra.left = "3px";
+        pixel = 3;
+        emp.style.opacity="1";
+        vue.style.opacity="0";
+        par.style.opacity="0";
+        emp.value="Empezar";
+        cae1.opacity=0;
+        cae2.opacity=0;
+        cae3.opacity=0;
+        cae4.opacity=0;
+        cae5.opacity=0;
+        cae6.opacity=0;
+        cae7.opacity=0;
+        cae8.opacity=0;
+        cae9.opacity=0;
+        cae10.opacity=0;
+        cae11.opacity=0;
+        cae12.opacity=0;
+        cae13.opacity=0;
+        cae14.opacity=0;
+        cae15.opacity=0;
+        cae16.opacity=0;
+        cae17.opacity=0;
+        cae18.opacity=0;
+        cae19.opacity=0;
+        cae20.opacity=0;
+        empezado = 0;
+        arma1=0;
+        arma2=0;
+        arma3=0;
+        arma4=0;
+        arma5=0;
+        arma6=0;
+        arma7=0;
+        arma8=0;
+        arma9=0;
+        arma10=0;
+        arma11=0;
+        arma12=0;
+        arma13=0;
+        arma14=0;
+        arma15=0;
+        arma16=0;
+        arma17=0;
+        arma18=0;
+        arma19=0;
+        arma20=0;
+        b=0;
+        over1.visibility="hidden";
+        over1.opacity="0";
+        vue.style.visibility="hidden";
+        par.style.visibility="hidden";
+        emp.style.visibility="visible";
+        ayuda1.opacity="0";
+        cuenta.style.opacity="0";
+        espacio=0;
+        parar2=0;
+        contenedorsillo1.visibility="visible";
+    }
+    function bajar1() {
+        if (cae1.opacity === "1") {
+                arma1 = arma1 + sumar3;
+                cae1.top = arma1 + "px";
+                if (arma1>=370) {
+                    arma1=0;
+                    cae1.opacity=0;
+                    cae1.top = "0px";
+                    puntos = puntos + 1;
+                    console.log(arma1);
+                }
+            };}
+
+    function bajar2() {
+        if (cae2.opacity === "1") {
+                arma2 = arma2 + sumar3;
+                cae2.top = arma2 + "px";
+                if (arma2>=370) {
+                    arma2=0;
+                    cae2.opacity=0;
+                    cae2.top = "0px";
+                    puntos = puntos + 1;
+                }
+            };}
+                
+    function bajar3() {
+        if (cae3.opacity === "1") {
+                arma3 = arma3 + sumar3;
+                cae3.top = arma3 + "px";
+                if (arma3>=370) {
+                    arma3=0;
+                    cae3.opacity=0;
+                    cae3.top = "0px";
+                    puntos = puntos + 1;
+                }
+            };}
+
+    function bajar4() {
+        if (cae4.opacity === "1") {
+                arma4 = arma4 + sumar3;
+                cae4.top = arma4 + "px";
+                if (arma4>=370) {
+                    arma4=0;
+                    cae4.opacity=0;
+                    cae4.top = "0px";
+                    puntos = puntos + 1;
+                }
+            };}
+
+    function bajar5() {
+        if (cae5.opacity === "1") {
+                arma5 = arma5 + sumar3;
+                cae5.top = arma5 + "px";
+                if (arma5>=370) {
+                    arma5=0;
+                    cae5.opacity=0;
+                    cae5.top = "0px";
+                    puntos = puntos + 1;
+                }
+            };}
+
+    function bajar6() {
+        if (cae6.opacity === "1") {
+                arma6 = arma6 + sumar3;
+                cae6.top = arma6 + "px";
+                if (arma6>=370) {
+                    arma6=0;
+                    cae6.opacity=0;
+                    cae6.top = "0px";
+                    puntos = puntos + 1;
+                }
+            };}
+
+    function bajar7() {
+        if (cae7.opacity === "1") {
+                arma7 = arma7 + sumar3;
+                cae7.top = arma7 + "px";
+                if (arma7>=370) {
+                    arma7=0;
+                    cae7.opacity=0;
+                    cae7.top = "0px";
+                    puntos = puntos + 1;
+                }
+            };}
+
+    function bajar8() {
+        if (cae8.opacity === "1") {
+                arma8 = arma8 + sumar3;
+                cae8.top = arma8 + "px";
+                if (arma8>=370) {
+                    arma8=0;
+                    cae8.opacity=0;
+                    cae8.top = "0px";
+                    puntos = puntos + 1;
+                }
+            };}
+
+    function bajar9() {
+        if (cae9.opacity === "1") {
+                arma9 = arma9 + sumar3;
+                cae9.top = arma9 + "px";
+                if (arma9>=370) {
+                    arma9=0;
+                    cae9.opacity=0;
+                    cae9.top = "0px";
+                    puntos = puntos + 1;
+                }
+            };}
+
+    function bajar10() {
+                if (cae10.opacity === "1") {
+                arma10 = arma10 + sumar3;
+                cae10.top = arma10 + "px";
+                if (arma10>=370) {
+                    arma10=0;
+                    cae10.opacity=0;
+                    cae10.top = "0px";
+                    puntos = puntos + 1;
+                }
+            };}
+    
+    function bajar11() {
+        if (cae11.opacity === "1") {
+                arma11 = arma11 + sumar3;
+                cae11.top = arma11 + "px";
+                if (arma11>=370) {
+                    arma11=0;
+                    cae11.opacity=0;
+                    cae11.top = "0px";
+                    puntos = puntos + 1;
+                }
+            };}
+
+    function bajar12() {
+        if (cae12.opacity === "1") {
+                arma12 = arma12 + sumar3;
+                cae12.top = arma12 + "px";
+                if (arma12>=370) {
+                    arma12=0;
+                    cae12.opacity=0;
+                    cae12.top = "0px";
+                    puntos = puntos + 1;
+                }
+            };}
+
+    function bajar13() {
+        if (cae13.opacity === "1") {
+                arma13 = arma13 + sumar3;
+                cae13.top = arma13 + "px";
+                if (arma13>=370) {
+                    arma13=0;
+                    cae13.opacity=0;
+                    cae13.top = "0px";
+                    puntos = puntos + 1;
+                }
+            };}
+
+    function bajar14() {
+        if (cae14.opacity === "1") {
+                arma14 = arma14 + sumar3;
+                cae14.top = arma14 + "px";
+                if (arma14>=370) {
+                    arma14=0;
+                    cae14.opacity=0;
+                    cae14.top = "0px";
+                    puntos = puntos + 1;
+                }
+            };}
+
+    function bajar15() {
+        if (cae15.opacity === "1") {
+                arma15 = arma15 + sumar3;
+                cae15.top = arma15 + "px";
+                if (arma15>=370) {
+                    arma15=0;
+                    cae15.opacity=0;
+                    cae15.top = "0px";
+                    puntos = puntos + 1;
+                }
+            };
+        }
+    function bajar16() {
+        if (cae16.opacity === "1") {
+                arma16 = arma16 + sumar3;
+                cae16.top = arma16 + "px";
+                if (arma16>=370) {
+                    arma16=0;
+                    cae16.opacity=0;
+                    cae16.top = "0px";
+                    puntos = puntos + 1;
+                }
+            };}
+
+    function bajar17() {
+        if (cae17.opacity === "1") {
+                arma17 = arma17 + sumar3;
+                cae17.top = arma17 + "px";
+                if (arma17>=370) {
+                    arma17=0;
+                    cae17.opacity=0;
+                    cae17.top = "0px";
+                    puntos = puntos + 1;
+                }
+            };}
+
+    function bajar18() {
+        if (cae18.opacity === "1") {
+                arma18 = arma18 + sumar3;
+                cae18.top = arma18 + "px";
+                if (arma18>=370) {
+                    arma18=0;
+                    cae18.opacity=0;
+                    cae18.top = "0px";
+                    puntos = puntos + 1;
+                }
+            };}
+
+    function bajar19() {
+        if (cae19.opacity === "1") {
+                arma19 = arma19 + sumar3;
+                cae19.top = arma19 + "px";
+                if (arma19>=370) {
+                    arma19=0;
+                    cae19.opacity=0;
+                    cae19.top = "0px";
+                    puntos = puntos + 1;
+                }
+            };}
+
+    function bajar20() {
+        if (cae20.opacity === "1") {
+                arma20 = arma20 + sumar3;
+                cae20.top = arma20 + "px";
+                if (arma20>=370) {
+                    arma20=0;
+                    cae20.opacity=0;
+                    cae20.top = "0px";
+                    puntos = puntos + 1;
+                }
+            };
+        }
+        function comprobar() {
+            lado = cuadra.left;
+            lado1 = parseInt(lado.substring(0, lado.length-2))
+            lido1 = cae1.left;
+            lido2 = cae2.left;
+            lido3 = cae3.left;
+            lido4 = cae4.left;
+            lido5 = cae5.left;
+            lido6 = cae6.left;
+            lido7 = cae7.left;
+            lido8 = cae8.left;
+            lido9 = cae9.left;
+            lido10 = cae10.left;
+            lido11 = cae11.left;
+            lido12 = cae12.left;
+            lido13 = cae13.left;
+            lido14 = cae14.left;
+            lido15 = cae15.left;
+            lido16 = cae16.left;
+            lido17 = cae17.left;
+            lido18 = cae18.left;
+            lido19 = cae19.left;
+            lido20 = cae20.left;
+            ludo1 = parseInt(lido1.substring(0, lido1.length-2)) - 27;
+            ludo2 = parseInt(lido2.substring(0, lido2.length-2)) - 27;
+            ludo3 = parseInt(lido3.substring(0, lido3.length-2)) - 27;
+            ludo4 = parseInt(lido4.substring(0, lido4.length-2)) - 27;
+            ludo5 = parseInt(lido5.substring(0, lido5.length-2)) - 27;
+            ludo6 = parseInt(lido6.substring(0, lido6.length-2)) - 27;
+            ludo7 = parseInt(lido7.substring(0, lido7.length-2)) - 27;
+            ludo8 = parseInt(lido8.substring(0, lido8.length-2)) - 27;
+            ludo9 = parseInt(lido9.substring(0, lido9.length-2)) - 27;
+            ludo10 = parseInt(lido10.substring(0, lido10.length-2)) - 27;
+            ludo11 = parseInt(lido11.substring(0, lido11.length-2)) - 27;
+            ludo12 = parseInt(lido12.substring(0, lido12.length-2)) - 27;
+            ludo13 = parseInt(lido13.substring(0, lido13.length-2)) - 27;
+            ludo14 = parseInt(lido14.substring(0, lido14.length-2)) - 27;
+            ludo15 = parseInt(lido15.substring(0, lido15.length-2)) - 27;
+            ludo16 = parseInt(lido16.substring(0, lido16.length-2)) - 27;
+            ludo17 = parseInt(lido17.substring(0, lido17.length-2)) - 27;
+            ludo18 = parseInt(lido18.substring(0, lido18.length-2)) - 27;
+            ludo19 = parseInt(lido19.substring(0, lido19.length-2)) - 27;
+            ludo20 = parseInt(lido20.substring(0, lido20.length-2)) - 27;
+            ludoo1 = ludo1 + 35;
+            ludoo2 = ludo2 + 35;
+            ludoo3 = ludo3 + 35;
+            ludoo4 = ludo4 + 35;
+            ludoo5 = ludo5 + 35;
+            ludoo6 = ludo6 + 35;
+            ludoo7 = ludo7 + 35;
+            ludoo8 = ludo8 + 35;
+            ludoo9 = ludo9 + 35;
+            ludoo10 = ludo10 + 35;
+            ludoo11 = ludo11 + 35;
+            ludoo12 = ludo12 + 35;
+            ludoo13 = ludo13 + 35;
+            ludoo14 = ludo14 + 35;
+            ludoo15 = ludo15 + 35;
+            ludoo16 = ludo16 + 35;
+            ludoo17 = ludo17 + 35;
+            ludoo18 = ludo18 + 35;
+            ludoo19 = ludo19 + 35;
+            ludoo20 = ludo20 + 35;
+            var pene = 0;
+            if(arma1 >= 350 && ludo1< lado1 && lado1 <  ludoo1) {
+                gueim();
+            }
+            if(arma2>=350 && ludo2<lado1 && lado1 <ludoo2) {
+                gueim();
+            }
+            if(arma3>=350 && ludo3<lado1 && lado1<ludoo3) {
+                gueim();
+            }
+            if(arma4>=350 && ludo4<lado1 && lado1<ludoo4) {
+                gueim();
+            }
+            if(arma5>=350 && ludo5<lado1 && lado1<ludoo5) {
+                gueim();
+            }
+            if(arma6>=350 && ludo6<lado1 && lado1<ludoo6) {
+                gueim();
+            }
+            if(arma7>=350 && ludo7<lado1 && lado1<ludoo7) {
+                gueim();
+            }
+            if(arma8>=350 && ludo8<lado1 && lado1<ludoo8) {
+                gueim();
+            }
+            if(arma9>=350 && ludo9<lado1 && lado1<ludoo9) {
+                gueim();
+            }
+            if(arma10>=350 && ludo10<lado1 && lado1<ludoo10) {
+                gueim();
+            }
+            if(arma11>=350 && ludo11<lado1 && lado1<ludoo11) {
+                gueim();
+            }
+            if(arma12>=350 && ludo12<lado1 && lado1<ludoo12) {
+                gueim();
+            }
+            if(arma13>=350 && ludo13<lado1 && lado1<ludoo13) {
+                gueim();
+            }
+            if(arma14>=350 && ludo14<lado1 && lado1<ludoo14) {
+                gueim();
+            }
+            if(arma15>=350 && ludo15<lado1 && lado1<ludoo15) {
+                gueim();
+            }
+            if(arma16>=350 && ludo16<lado1 && lado1<ludoo16) {
+                gueim();
+            }
+            if(arma17>=350 && ludo17<lado1 && lado1<ludoo17) {
+                gueim();
+            }
+            if(arma18>=350 && ludo18<lado1 && lado1<ludoo18) {
+                gueim();
+            }
+            if(arma19>=350 && ludo19<lado1 && lado1<ludoo19) {
+                gueim();
+            }
+            if(arma20>=350 && ludo20<lado1 && lado1<ludoo20) {
+                gueim();
+            }
+            cuenta.innerHTML=puntos;
+        }
+        function gueim() {
+        espacio=2;
+        cae1.opacity=0;
+        cae2.opacity=0;
+        cae3.opacity=0;
+        cae4.opacity=0;
+        cae5.opacity=0;
+        cae6.opacity=0;
+        cae7.opacity=0;
+        cae8.opacity=0;
+        cae9.opacity=0;
+        cae10.opacity=0;
+        cae11.opacity=0;
+        cae12.opacity=0;
+        cae13.opacity=0;
+        cae14.opacity=0;
+        cae15.opacity=0;
+        cae16.opacity=0;
+        cae17.opacity=0;
+        cae18.opacity=0;
+        cae19.opacity=0;
+        cae20.opacity=0;
+        vue.style.opacity="0";
+        par.style.opacity="0";
+        clearInterval(der);
+        clearInterval(izq);
+        clearInterval(wasa);
+        clearInterval(waso1);
+        clearInterval(waso2);
+        clearInterval(waso3);
+        clearInterval(waso4);
+        clearInterval(waso5);
+        clearInterval(waso6);
+        clearInterval(waso7);
+        clearInterval(waso8);
+        clearInterval(waso9);
+        clearInterval(waso10);
+        clearInterval(waso11);
+        clearInterval(waso12);
+        clearInterval(waso13);
+        clearInterval(waso14);
+        clearInterval(waso15);
+        clearInterval(waso16);
+        clearInterval(waso17);
+        clearInterval(waso18);
+        clearInterval(waso19);
+        clearInterval(waso20);
+        clearInterval(compro);
+        b=0;
+        over1.visibility="visible";
+        vue.style.visibility="hidden";
+        par.style.visibility="hidden";
+        cuenta.style.opacity="0.7";
+        ultimo1 = puntos;
+        ultimo2.innerHTML="Último: " + ultimo1;
+        subir1 = setInterval("subir()",2)
+        setTimeout(function(){over1.opacity="0.12";
+                   ayuda1.opacity="0.12";},680);
+        setTimeout(function(){over1.opacity="0.25";
+                   ayuda1.opacity="0.25";},750);
+        setTimeout(function(){over1.opacity="0.37";
+                   ayuda1.opacity="0.37";},870);
+        setTimeout(function(){over1.opacity="0.5";
+                   ayuda1.opacity="0.5";},1000);
+        setTimeout(function(){over1.opacity="0.62";
+                   ayuda1.opacity="0.62";},1120);
+        setTimeout(function(){over1.opacity="0.75";
+                   ayuda1.opacity="0.75";},1250);
+        setTimeout(function(){over1.opacity="0.87";
+                   ayuda1.opacity="0.87";},1370);
+        setTimeout(function(){over1.opacity="1";
+                   ayuda1.opacity="1";
+                   parar2=1;},1500);
+        if (ultimo1 > mejor1) {
+        mejor1 = ultimo1;
+        mejor2.innerHTML="Mejor: " + mejor1;
+        }
+        if (localStorage.dificul === "0") {
+            localStorage.facc = ultimo1;
+            localStorage.facm = mejor1;
+        }
+        if (localStorage.dificul === "1") {
+            localStorage.norc = ultimo1;
+            localStorage.norm = mejor1;
+        }
+        if (localStorage.dificul === "2") {
+            localStorage.difc = ultimo1;
+            localStorage.difm = mejor1;
+        }
+        }
+        
+        function espasio() {
+            if (espacio===0) {
+                empezar();
+            }
+            else if (espacio===1) {
+                vuelta();
+            }
+            else if (espacio===2) {
+                parar1();
+            }
+            else{
+                console.log("a");
+            }
+        }
+        
+        function subir() {
+            if (subir2===0) {
+                posision = posision - 1;
+                cuenta.style.top= posision + "px";
+                if (posision===-195) {
+                    subir2=1;
+                    clearInterval(subir1);
+                }
+            }
+            else{
+                subir2=1;
+            }
+        }
+        function parar1() {
+            if (parar2===1) {
+                parar();
+            }
+            else{
+                parar2=0;
+            }
+        }
+        function instrucciones() {
+            alert("Bienvenid@ a este juego");
+            alert("Eres el cuadrado rojo, y tienes que esquivar los bloques que caen simplemente dándole al botón de \"Girar\"");
+            alert("Pierdes cuando uno de los bloques te toca");
+            alert("En ordenador también se puede jugar pulsando espacio y en móvil pulsando el recuadro de líneas discontinuas");
+            alert("Disfruta ^^");
+        }
+        function cero() {
+            mejor1 = 0;
+            ultimo1 = 0;
+            ultimo2.innerHTML="Último: 0";
+            mejor2.innerHTML="Mejor: 0";
+            if (localStorage.dificul === "0") {
+                localStorage.facc = 0;
+                localStorage.facm = 0;
+            }
+            if (localStorage.dificul === "1") {
+                localStorage.norc = 0;
+                localStorage.norm = 0;
+            }
+            if (localStorage.dificul === "2") {
+                localStorage.difc = 0;
+                localStorage.difm = 0;
+            }
+        }
+        function faci() {
+            localStorage.dificul = 0;
+            cambi();
+        }
+        function norma() {
+            localStorage.dificul = 1;
+            cambi();
+        }
+        function difici() {
+            localStorage.dificul = 2;
+            cambi();
+        }
+        function cambi() {
+            if (localStorage.dificul === "0") {
+                dificulti1.innerHTML="(Dificultad: Fácil)";
+                facil1.className="dado";
+                normal1.className="nodado";
+                dificil1.className="nodado";
+                sumar1=450;
+                sumar2=1.4;
+                sumar3=0.75;
+                ultimo2.innerHTML="Último: " + localStorage.facc;
+                mejor2.innerHTML="Mejor: " + localStorage.facm;
+                ultimo1 = localStorage.facc;
+                mejor1 = localStorage.facm;
+            };
+            if (localStorage.dificul === "1") {
+                dificulti1.innerHTML="(Dificultad: Normal)";
+                facil1.className="nodado";
+                normal1.className="dado";
+                dificil1.className="nodado";
+                sumar1=350;
+                sumar2=2;
+                sumar3=1;
+                ultimo2.innerHTML="Último: " + localStorage.norc;
+                mejor2.innerHTML="Mejor: " + localStorage.norm;
+                ultimo1 = localStorage.norc;
+                mejor1 = localStorage.norm;
+            };
+            if (localStorage.dificul === "2") {
+                dificulti1.innerHTML="(Dificultad: Difícil)";
+                facil1.className="nodado";
+                normal1.className="nodado";
+                dificil1.className="dado";
+                sumar1=250;
+                sumar2=2.7;
+                sumar3=1.25;
+                ultimo2.innerHTML="Último: " + localStorage.difc;
+                mejor2.innerHTML="Mejor: " + localStorage.difm;
+                ultimo1 = localStorage.difc;
+                mejor1 = localStorage.difm;
+            };
+        }
+        cambi();
+</script>
+</body>
+</html>
